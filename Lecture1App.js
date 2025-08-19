@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
 const rootReact = ReactDOM.createRoot(document.getElementById("root"));   
 /*const headingReact = React.createElement(
     "h1", 
@@ -29,8 +32,8 @@ const parentReact = React.createElement(
         "div",
         {id: "child"},
         [
-            React.createElement("h1", {id: "heading"}, "Hello world from React Hierarchy"),
-            React.createElement("h2", {id: "subheading"}, "This is a subheading"),
+            React.createElement("h1", {id: "heading", key:"heading"}, "Hello world from React Hierarchy"),
+            React.createElement("h2", {id: "subheading", key:"subheading"}, "This is a subheading"),
         ]
     )
 )
