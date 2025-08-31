@@ -62,3 +62,7 @@
     color: white;
     cursor: pointer;
 }
+.loginBttn {
+    padding: 0 20px;
+    cursor: pointer;
+}
