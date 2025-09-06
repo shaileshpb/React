@@ -1,6 +1,10 @@
+import { Link } from "react-router-dom";
 const RestaurantCard = (props) => {
     return (
-        <div className="restaurantCard">
+        <div className="restaurantCard" onClick={()=> {
+            console.log("Restaurant ID: ", props.ID);
+            
+        }}>
             <img 
                 className="restaurantImage"
                 src={

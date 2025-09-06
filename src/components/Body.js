@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard.js";
 //import containerList from "../utils/mockData.js";
 import { useEffect, useState } from "react";
@@ -103,7 +104,13 @@ const Body = () => {
             <div className="restaurantContainer">
                 {
                     listOfRestaurants.map((restaurant) => {
-                        return <RestaurantCard key={restaurant.info.id} restRating={restaurant.info.avgRating} img={restaurant.info.cloudinaryImageId} restName={restaurant.info.name} foodItem={restaurant.info.cuisines}/>
+                        return (
+                        <Link to={"/menu/" + restaurant.info.id} key={restaurant.info.id}>
+                            <RestaurantCard key={restaurant.info.id} ID={restaurant.info.id} 
+                            restRating={restaurant.info.avgRating} img={restaurant.info.cloudinaryImageId} 
+                            restName={restaurant.info.name} foodItem={restaurant.info.cuisines}/>
+                        </Link>
+                    )
                     })
                 }
             </div>
