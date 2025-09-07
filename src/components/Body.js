@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import RestaurantCard from "./RestaurantCard.js";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard.js";
 //import containerList from "../utils/mockData.js";
 import { useEffect, useState } from "react";
 
@@ -54,23 +54,24 @@ const Body = () => {
             }
         }
     ];
+    
     const [allRestaurants, setAllRestaurants] = useState(containerList);
-        //
-        let [listOfRestaurants, setListOfRestaurants] = useState(containerList);
+    let [listOfRestaurants, setListOfRestaurants] = useState(containerList);
     // useEffect() hook
-        useEffect(() => {
-            loadData();
+    useEffect(() => {
+        loadData();
 
-        }, []);
+    }, []);
 
-        const loadData = async () => {
-            const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.594566&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-            const json = await data.json();
-            console.log(json);
-            setAllRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-            setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        }
+    const loadData = async () => {
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.594566&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const json = await data.json();
+        console.log(json);
+        setAllRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    }
 
+    const ResturantCardPromoted = withPromotedLabel(RestaurantCard);
     
     return (
         <div className="body">
@@ -106,9 +107,18 @@ const Body = () => {
                     listOfRestaurants.map((restaurant) => {
                         return (
                         <Link to={"/menu/" + restaurant.info.id} key={restaurant.info.id}>
-                            <RestaurantCard key={restaurant.info.id} ID={restaurant.info.id} 
-                            restRating={restaurant.info.avgRating} img={restaurant.info.cloudinaryImageId} 
-                            restName={restaurant.info.name} foodItem={restaurant.info.cuisines}/>
+                            {
+                                restaurant.info.id % 2 === 0 ? (
+                                    <ResturantCardPromoted key={restaurant.info.id} ID={restaurant.info.id} 
+                                    restRating={restaurant.info.avgRating} img={restaurant.info.cloudinaryImageId} 
+                                    restName={restaurant.info.name} foodItem={restaurant.info.cuisines}/>
+                                ) : (
+                                    <RestaurantCard key={restaurant.info.id} ID={restaurant.info.id} 
+                                    restRating={restaurant.info.avgRating} img={restaurant.info.cloudinaryImageId} 
+                                    restName={restaurant.info.name} foodItem={restaurant.info.cuisines}/>
+                                )
+                            }
+                            
                         </Link>
                     )
                     })
