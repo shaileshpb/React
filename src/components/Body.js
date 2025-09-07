@@ -76,7 +76,7 @@ const Body = () => {
         <div className="body">
             <div>
                 <input 
-                    className="search" 
+                    className="search border border-black p-2 m-2" 
                     type="text" 
                     placeholder="Search"
                     onChange={(e) => {
@@ -101,7 +101,7 @@ const Body = () => {
                 </button>
             </div>
 
-            <div className="restaurantContainer">
+            <div className="flex flex-wrap">
                 {
                     listOfRestaurants.map((restaurant) => {
                         return (
